@@ -43,4 +43,10 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+--USAGE
+
+select get_distance_in_miles_between_geo_locations(-34.017330, 22.809500, latitude, longitude) as distance_from_input from places;
+
+
 ```
