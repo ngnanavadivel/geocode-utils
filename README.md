@@ -31,3 +31,16 @@ public static double distance(double lat1, double lat2, double lon1,
 }
 
 ```
+
+```sql
+DELIMITER $$
+
+DROP FUNCTION IF EXISTS `get_distance_in_miles_between_geo_locations` $$
+CREATE FUNCTION get_distance_in_miles_between_geo_locations(geo1_latitude decimal(10,6), geo1_longitude decimal(10,6), geo2_latitude decimal(10,6), geo2_longitude decimal(10,6)) 
+returns decimal(10,3) DETERMINISTIC
+BEGIN
+  return ((ACOS(SIN(geo1_latitude * PI() / 180) * SIN(geo2_latitude * PI() / 180) + COS(geo1_latitude * PI() / 180) * COS(geo2_latitude * PI() / 180) * COS((geo1_longitude - geo2_longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515);
+END $$
+
+DELIMITER ;
+```
